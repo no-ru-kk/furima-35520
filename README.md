@@ -16,7 +16,6 @@
 
 ### Association
 
-extend ActiveHash::Associations::ActiveRecordExtensions
 - has_many :items
 - has_many :records
 
@@ -62,7 +61,7 @@ extend ActiveHash::Associations::ActiveRecordExtensions
 ### Association
 
 extend ActiveHash::Associations::ActiveRecordExtensions
-- has_one :record
+- belongs_to :record
 - belongs_to :prefecture
 
 
@@ -78,7 +77,7 @@ extend ActiveHash::Associations::ActiveRecordExtensions
 
 - belongs_to :user
 - belongs_to :item
-- belongs_to :delivery_info
+- has_one :delivery_info
 
 
 ## category テーブル
