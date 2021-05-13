@@ -2,18 +2,16 @@
 
 ## users テーブル
 
-| Column        | Type    | Options     |
-| ------------- | ------- | ----------- |
-| nickname      | string  | null: false |
-| email         | string  | null: false |
-| password      | string  | null: false |
-| last_name     | string  | null: false |
-| first_name    | string  | null: false |
-| lname_reading | string  | null: false |
-| fname_reading | string  | null: false |
-| year          | integer | null: false |
-| month         | integer | null: false |
-| day           | integer | null: false |
+| Column        | Type    | Options                   |
+| ------------- | ------- | ------------------------- |
+| nickname      | string  | null: false               |
+| email         | string  | null: false, unique: true |
+| password      | string  | null: false               |
+| last_name     | string  | null: false               |
+| first_name    | string  | null: false               |
+| lname_reading | string  | null: false               |
+| fname_reading | string  | null: false               |
+| birth_date    | data    | null: false               |
 
 
 ### Association
@@ -21,24 +19,20 @@
 extend ActiveHash::Associations::ActiveRecordExtensions
 - has_many :items
 - has_many :delivery_info
-- has_many :comments
-- belongs_to :year
-- belongs_to :month
-- belongs_to :day
+- has_many :records
 
 
 ## items テーブル
 
 | Column        | Type       | Options                        |
 | ------------- | ---------- | -------------------------------|
-| image         |            |                                |
-| item_name     | string     | null: false                    |
+| name          | string     | null: false                    |
 | item_explain  | text       | null: false                    |
-| category      | integer    | null: false                    |
-| item_status   | text       | null: false                    |
-| delivery_fee  | text       | null: false                    |
-| prefecture    | integer    | null: false                    |
-| delivery_date | text       | null: false                    |
+| category_id   | integer    | null: false                    |
+| status_id     | integer    | null: false                    |
+| fee_id        | integer    | null: false                    |
+| prefecture_id | integer    | null: false                    |
+| date_id       | integer    | null: false                    |
 | price         | integer    | null: false                    |
 | user          | references | null: false, foreign_key: true |
 
@@ -46,10 +40,14 @@ extend ActiveHash::Associations::ActiveRecordExtensions
 
 extend ActiveHash::Associations::ActiveRecordExtensions
 - has_one :delivery_info
+- has_one :record
 - has_many :comments
 - belongs_to :user
 - belongs_to :category
+- belongs_to :status
+- belongs_to :fee
 - belongs_to :prefecture
+- belongs_to :date
 
 
 ## delivery_info テーブル
@@ -57,10 +55,10 @@ extend ActiveHash::Associations::ActiveRecordExtensions
 | Column        | Type       | Options                        |
 | ------------- | ---------- | -------------------------------|
 | postal_code   | string     | null: false                    |
-| prefecture    | integer    | null: false                    |
+| prefecture_id | integer    | null: false                    |
 | city          | string     | null: false                    |
 | house_number  | string     | null: false                    |
-| building_name | string     | null: false                    |
+| building_name | string     |                                |
 | phone_number  | string     | null: false                    |
 | user          | references | null: false, foreign_key: true |
 | item          | references | null: false, foreign_key: true |
@@ -73,11 +71,10 @@ extend ActiveHash::Associations::ActiveRecordExtensions
 - belongs_to :prefecture
 
 
-## comments テーブル
+## records テーブル
 
 | Column     | Type       | Options                        |
 | ---------- | ---------- | -------------------------------|
-| text       | text       | null: false                    |
 | user       | references | null: false, foreign_key: true |
 | item       | references | null: false, foreign_key: true |
 
@@ -88,32 +85,25 @@ extend ActiveHash::Associations::ActiveRecordExtensions
 - belongs_to :item
 
 
-## year テーブル
-
-### Association
-include ActiveHash::Associations
-- has_many :users
-
-
-## month テーブル
-
-### Association
-include ActiveHash::Associations
-- has_many :users
-
-
-## day テーブル
-
-### Association
-include ActiveHash::Associations
-- has_many :users
-
-
 ## category テーブル
 
 ### Association
 include ActiveHash::Associations
 - has_many :itmes
+
+
+## status テーブル
+
+### Association
+include ActiveHash::Associations
+- has_many :items
+
+
+## fee テーブル
+
+### Association
+include ActiveHash::Associations
+- has_many :items
 
 
 ## prefecture テーブル
@@ -122,3 +112,10 @@ include ActiveHash::Associations
 include ActiveHash::Associations
 - has_many :itmes
 - has_many :delivery_info
+
+
+## date テーブル
+
+### Association
+include ActiveHash::Associations
+- has_many :items
