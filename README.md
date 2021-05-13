@@ -2,23 +2,22 @@
 
 ## users テーブル
 
-| Column        | Type    | Options                   |
-| ------------- | ------- | ------------------------- |
-| nickname      | string  | null: false               |
-| email         | string  | null: false, unique: true |
-| password      | string  | null: false               |
-| last_name     | string  | null: false               |
-| first_name    | string  | null: false               |
-| lname_reading | string  | null: false               |
-| fname_reading | string  | null: false               |
-| birth_date    | data    | null: false               |
+| Column             | Type    | Options                   |
+| ------------------ | ------- | ------------------------- |
+| nickname           | string  | null: false               |
+| email              | string  | null: false, unique: true |
+| encrypted_password | string  | null: false               |
+| last_name          | string  | null: false               |
+| first_name         | string  | null: false               |
+| lname_reading      | string  | null: false               |
+| fname_reading      | string  | null: false               |
+| birth_date         | data    | null: false               |
 
 
 ### Association
 
 extend ActiveHash::Associations::ActiveRecordExtensions
 - has_many :items
-- has_many :delivery_info
 - has_many :records
 
 
@@ -39,9 +38,7 @@ extend ActiveHash::Associations::ActiveRecordExtensions
 ### Association
 
 extend ActiveHash::Associations::ActiveRecordExtensions
-- has_one :delivery_info
 - has_one :record
-- has_many :comments
 - belongs_to :user
 - belongs_to :category
 - belongs_to :status
@@ -60,14 +57,12 @@ extend ActiveHash::Associations::ActiveRecordExtensions
 | house_number  | string     | null: false                    |
 | building_name | string     |                                |
 | phone_number  | string     | null: false                    |
-| user          | references | null: false, foreign_key: true |
-| item          | references | null: false, foreign_key: true |
+| record        | references | null: false, foreign_key: true |
 
 ### Association
 
 extend ActiveHash::Associations::ActiveRecordExtensions
-- belongs_to :user
-- belongs_to :item
+- has_one :record
 - belongs_to :prefecture
 
 
@@ -83,6 +78,7 @@ extend ActiveHash::Associations::ActiveRecordExtensions
 
 - belongs_to :user
 - belongs_to :item
+- belongs_to :delivery_info
 
 
 ## category テーブル
