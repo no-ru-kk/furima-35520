@@ -11,7 +11,7 @@
 | first_name         | string  | null: false               |
 | lname_reading      | string  | null: false               |
 | fname_reading      | string  | null: false               |
-| birth_date         | data    | null: false               |
+| birth_date         | date    | null: false               |
 
 
 ### Association
