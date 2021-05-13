@@ -36,14 +36,8 @@
 
 ### Association
 
-extend ActiveHash::Associations::ActiveRecordExtensions
 - has_one :record
 - belongs_to :user
-- belongs_to :category
-- belongs_to :status
-- belongs_to :fee
-- belongs_to :prefecture
-- belongs_to :date
 
 
 ## delivery_info テーブル
@@ -60,9 +54,7 @@ extend ActiveHash::Associations::ActiveRecordExtensions
 
 ### Association
 
-extend ActiveHash::Associations::ActiveRecordExtensions
 - belongs_to :record
-- belongs_to :prefecture
 
 
 ## records テーブル
@@ -78,39 +70,3 @@ extend ActiveHash::Associations::ActiveRecordExtensions
 - belongs_to :user
 - belongs_to :item
 - has_one :delivery_info
-
-
-## category テーブル
-
-### Association
-include ActiveHash::Associations
-- has_many :itmes
-
-
-## status テーブル
-
-### Association
-include ActiveHash::Associations
-- has_many :items
-
-
-## fee テーブル
-
-### Association
-include ActiveHash::Associations
-- has_many :items
-
-
-## prefecture テーブル
-
-### Association
-include ActiveHash::Associations
-- has_many :itmes
-- has_many :delivery_info
-
-
-## date テーブル
-
-### Association
-include ActiveHash::Associations
-- has_many :items
