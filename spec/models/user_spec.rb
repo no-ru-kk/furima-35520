@@ -107,7 +107,7 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include "Lname reading is invalid. Input full-width katakana characters."
       end
-      it 'fname_readingがカタカナでは登録できない' do
+      it 'fname_readingがカタカナ以外では登録できない' do
         @user.fname_reading = 'たろう'
         @user.valid?
         expect(@user.errors.full_messages).to include "Fname reading is invalid. Input full-width katakana characters."
