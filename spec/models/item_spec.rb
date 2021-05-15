@@ -11,7 +11,7 @@ RSpec.describe Item, type: :model do
         expect(@item).to be_valid
       end
       it 'priceが300円以上9999999以下であれば登録できる' do
-        @item.price = '300'
+        @item.price = 300
         expect(@item).to be_valid
       end
     end
