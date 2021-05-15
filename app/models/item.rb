@@ -1,7 +1,11 @@
 class Item < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :user
-  # has_one :record
+  belongs_to :category
+  belongs_to :status
+  belongs_to :fee
+  belongs_to :prefecture
+  belongs_to :days
   has_one_attached :image
 
   with_options presence: true do
@@ -14,7 +18,4 @@ class Item < ApplicationRecord
 
   validates :price, presence: true, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999 }, format: {with: /\A[0-9]+\z/i, message: "is invalid. Input half-width number."}
   
-  # def was_attached?
-  #   self.image.attached?
-  # end
 end
