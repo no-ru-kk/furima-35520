@@ -17,7 +17,7 @@
 ### Association
 
 - has_many :items
-- has_many :records
+- has_many :orders
 
 
 ## items テーブル
@@ -36,8 +36,8 @@
 
 ### Association
 
-- has_one :record
 - belongs_to :user
+- has_one :order
 
 
 ## delivery_info テーブル
@@ -50,14 +50,14 @@
 | house_number  | string     | null: false                    |
 | building_name | string     |                                |
 | phone_number  | string     | null: false                    |
-| record        | references | null: false, foreign_key: true |
+| order         | references | null: false, foreign_key: true |
 
 ### Association
 
-- belongs_to :record
+- belongs_to :order
 
 
-## records テーブル
+## orders テーブル
 
 | Column     | Type       | Options                        |
 | ---------- | ---------- | -------------------------------|
