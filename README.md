@@ -40,7 +40,7 @@
 - has_one :order
 
 
-## delivery_info テーブル
+## deliveries テーブル
 
 | Column        | Type       | Options                        |
 | ------------- | ---------- | -------------------------------|
@@ -69,4 +69,4 @@
 
 - belongs_to :user
 - belongs_to :item
-- has_one :delivery_info
+- has_one :delivery

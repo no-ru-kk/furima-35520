@@ -1,7 +1,8 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_item,           only: [:show, :edit, :update, :destroy]
-  before_action :judge_user,         only: [:edit, :update, :destroy]
+  before_action :judge_user1,        only: [:edit, :update, :destroy]
+  before_action :judge_user2,        only: [:edit]
 
   def index
     @item = Item.includes(:user).order("created_at DESC")
@@ -48,8 +49,15 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
   end
 
-  def judge_user
+  def judge_user1
     unless current_user.id == @item.user_id
+      redirect_to action: :index
+    end
+  end
+
+  def judge_user2
+    @item = Item.find(params[:id])
+    if @item.order != nil
       redirect_to action: :index
     end
   end

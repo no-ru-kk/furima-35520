@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 2021_05_16_234814) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
-  create_table "delivery_infos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "deliveries", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "postal_code", null: false
     t.integer "prefecture_id", null: false
     t.string "city", null: false
@@ -43,7 +43,7 @@ ActiveRecord::Schema.define(version: 2021_05_16_234814) do
     t.bigint "order_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["order_id"], name: "index_delivery_infos_on_order_id"
+    t.index ["order_id"], name: "index_deliveries_on_order_id"
   end
 
   create_table "items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -89,7 +89,7 @@ ActiveRecord::Schema.define(version: 2021_05_16_234814) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "delivery_infos", "orders"
+  add_foreign_key "deliveries", "orders"
   add_foreign_key "items", "users"
   add_foreign_key "orders", "items"
   add_foreign_key "orders", "users"
