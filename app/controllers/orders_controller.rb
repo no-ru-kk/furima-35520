@@ -29,9 +29,7 @@ class OrdersController < ApplicationController
   end
 
   def judge_user
-    if current_user.id == @item.user_id
-      redirect_to root_path
-    elsif @item.order != nil
+    if current_user.id == @item.user_id || @item.order != nil
       redirect_to root_path
     end
   end
