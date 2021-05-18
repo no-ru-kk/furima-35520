@@ -2,7 +2,9 @@ require 'rails_helper'
 
 RSpec.describe OrderDelivery, type: :model do
   before do
-    @order_delivery = FactoryBot.build(:order_delivery)
+    user = FactoryBot.build(:user)
+    item = FactoryBot.build(:item)
+    @order_delivery = FactoryBot.build(:order_delivery, user_id: user, item_id: item)
   end
 
   describe '商品購入機能' do
@@ -72,6 +74,11 @@ RSpec.describe OrderDelivery, type: :model do
       end
       it 'phone_numberが全角では購入できない' do
         @order_delivery.phone_number = '０９０５５５５６６３３'
+        @order_delivery.valid?
+        expect(@order_delivery.errors.full_messages).to include "Phone number is invalid.Only numbers within 11 digits can be saved"
+      end
+      it 'phone_numberが半角英数混合では購入できない' do
+        @order_delivery.phone_number = '1kk9'
         @order_delivery.valid?
         expect(@order_delivery.errors.full_messages).to include "Phone number is invalid.Only numbers within 11 digits can be saved"
       end

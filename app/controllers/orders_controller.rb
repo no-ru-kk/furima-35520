@@ -29,7 +29,6 @@ class OrdersController < ApplicationController
   end
 
   def judge_user
-    set_item
     if current_user.id == @item.user_id
       redirect_to root_path
     elsif @item.order != nil
